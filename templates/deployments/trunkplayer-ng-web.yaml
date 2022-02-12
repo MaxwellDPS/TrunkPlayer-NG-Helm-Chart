@@ -22,7 +22,7 @@ spec:
           name: tpng-web
           envFrom:
           - configMapRef:
-            name: {{ .Release.Name }}-configmap
+              name: {{ .Release.Name }}-configmap
           ports:
             - containerPort: 3031
           resources: 
@@ -37,7 +37,7 @@ spec:
           name: nginx
           envFrom:
           - configMapRef:
-            name: {{ .Release.Name }}-configmap
+              name: {{ .Release.Name }}-configmap
           ports:
             - containerPort: 80
           resources: 
