@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Release.Name }}-rabbitmq
+  name: {{ .Release.Name }}-rabbitmq
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-rabbitmq
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+        labels:
+          app: {{ .Release.Name }}-rabbitmq
+    spec:
+      containers:
+        - env:
+          - name: RABBITMQ_CONSUMER_TIMEOUT
+            value: "8600000"
+          - name: RABBITMQ_DEFAULT_PASS
+            value: {{ .Values.RABBITMQ_DEFAULT_PASS | quote }}
+          - name: RABBITMQ_DEFAULT_USER
+            value: {{ .Values.RABBITMQ_DEFAULT_USER | quote }}
+          image: {{ .Values.RABBITMQ_IMAGE | quote  }}
+          name: rabbitmq
+          resources: 
+            limits:
+              memory: 3048Mi
+              cpu: 1
+            requests:
+              memory: 2048Mi
+              cpu: "150m"
+          ports:
+            - containerPort: 5672
+            - containerPort: 15672
+          volumeMounts:
+            - mountPath: /var/lib/rabbitmq
+              name: {{ .Release.Name }}-amqpdata
+      restartPolicy: Always
+      volumes:
+        - name: {{ .Release.Name }}-amqpdata
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-amqpdata

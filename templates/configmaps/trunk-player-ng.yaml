@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+  namespace: {{ .Release.Namespace }}
+data:
+  DEBUG: {{ .Values.DEBUG | quote }}
+  FORCE_SECURE: {{ .Values.FORCE_SECURE | quote }}
+  SEND_TELEMETRY: {{ .Values.SEND_TELEMETRY | quote }}
+  SECRET_KEY: {{ .Values.SECRET_KEY | quote }}
+  SQL_DATABASE: {{ .Values.SQL_DATABASE | quote }}
+  SQL_USER: {{ .Values.SQL_USER | quote }}
+  SQL_PASSWORD: {{ .Values.SQL_PASSWORD | quote }}
+  SQL_HOST: {{ .Values.SQL_HOST | quote }}
+  TZ: {{ .Values.TZ | quote }}
+  CELERY_BROKER_URL: "ampq://{{ .Values.RABBITMQ_DEFAULT_USER }}:{{ .Values.RABBITMQ_DEFAULT_PASS }}@{{ .Release.Name }}-rabbitmq.{{ .Release.Namespace }}.svc.cluster.local"
+  USE_S3: {{ .Values.USE_S3 | quote }}
+  S3_ACCESS_KEY_ID: {{ .Values.S3_ACCESS_KEY_ID | quote }}
+  S3_SECRET_ACCESS_KEY: {{ .Values.S3_SECRET_ACCESS_KEY | quote }}
+  S3_BUCKET_NAME: {{ .Values.S3_BUCKET_NAME | quote }}
+  S3_ENDPOINT_URL: {{ .Values.S3_ENDPOINT_URL | quote }}

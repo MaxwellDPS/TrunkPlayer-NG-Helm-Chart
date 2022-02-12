@@ -1,0 +1,15 @@
+{{ if not .Values.USE_S3 }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+      app: {{ .Release.Name }}
+  name: {{ .Release.Name }}-staticfiles
+  namespace: {{ .Release.Namespace }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 4096Mi
+{{ end }}

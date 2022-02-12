@@ -1,0 +1,40 @@
+# NGINX INGRESS OPTIONS
+TRUNKPLAYER_NG_INGRESS_HOST: "tp-ng.io"
+TRUNKPLAYER_NG_TLS_SECRET: "tpng-tls"
+
+# Replication
+TRUNKPLAYER_NG_WEB_REPLICAS_MIN: 1
+TRUNKPLAYER_NG_WEB_REPLICAS_MAX: 5
+
+TRUNKPLAYER_NG_WORKER_REPLICAS_MIN: 10
+TRUNKPLAYER_NG_WORKER_REPLICAS_MAX: 50
+
+# RABBITMQ OPTIONS
+RABBITMQ_IMAGE: "rabbitmq:3.8-management"
+RABBITMQ_DEFAULT_PASS: "CHANGEME"
+RABBITMQ_DEFAULT_USER: "trunkplayerng"
+
+# Troubleshooting
+DEBUG: "True"
+SEND_TELEMETRY: "True"
+SENTRY_DSN: "https://d83fa527e0044728b20de7dab246ea6f@bigbrother.weathermelon.io/2"
+
+
+# Security
+FORCE_SECURE: "True"
+SECRET_KEY: "%2%xjx4c3obf_xa8hsdbd@ci+8!4)@x16_!auo*h(%*p_z(g"
+
+SQL_DATABASE: ""
+SQL_USER: ""
+SQL_PASSWORD: ""
+SQL_HOST: ""
+
+TZ: "America/Chicago"
+
+# Audio & static file Storage options
+USE_S3: False
+AUDIO_FILE_STORAGE_SIZE: "50Gi" # Only needed if not using S3
+S3_ACCESS_KEY_ID: ""
+S3_SECRET_ACCESS_KEY: ""
+S3_BUCKET_NAME: ""
+S3_ENDPOINT_URL: ""

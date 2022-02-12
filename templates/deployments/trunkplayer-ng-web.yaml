@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Release.Name }}-web
+  name: {{ .Release.Name }}-web
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.TRUNKPLAYER_NG_WEB_REPLICAS_MIN }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-web
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-web
+    spec:
+      containers:
+          
+        - image: maxwelldps/trunkplayer-ng:{{ .Chart.AppVersion }}
+          name: tpng-web
+          envFrom:
+          - configMapRef:
+            name: {{ .Release.Name }}-configmap
+          ports:
+            - containerPort: 3031
+          resources: 
+            limits:
+              memory: 2048Mi
+              cpu: "1500m"
+            requests:
+              memory: 256Mi
+              cpu: 1
+        
+        - image: maxwelldps/trunkplayer-ng-nginx:{{ .Chart.AppVersion }}
+          name: nginx
+          envFrom:
+          - configMapRef:
+            name: {{ .Release.Name }}-configmap
+          ports:
+            - containerPort: 80
+          resources: 
+            limits:
+              memory: 2048Mi
+              cpu: "1500m"
+            requests:
+              memory: 256Mi
+              cpu: 1
+        {{ if not .Values.USE_S3 }}
+          volumeMounts:
+            - mountPath: /code/static
+              name: {{ .Release.Name }}-staticfiles
+            - mountPath: /code/mediafiles
+              name: {{ .Release.Name }}-mediafiles
+      volumes:
+        - name: {{ .Release.Name }}-staticfiles
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-staticfiles
+        - name: {{ .Release.Name }}-mediafiles
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-mediafiles
+        {{ end }}
+      restartPolicy: Always
