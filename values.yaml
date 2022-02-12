@@ -24,9 +24,9 @@ SENTRY_DSN: "https://d83fa527e0044728b20de7dab246ea6f@bigbrother.weathermelon.io
 FORCE_SECURE: "True"
 SECRET_KEY: "%2%xjx4c3obf_xa8hsdbd@ci+8!4)@x16_!auo*h(%*p_z(g"
 
-SQL_DATABASE: ""
-SQL_USER: ""
-SQL_PASSWORD: ""
+SQL_DATABASE: "tpng"
+SQL_USER: "trunkplayerng"
+SQL_PASSWORD: "S3CuR1tY"
 SQL_HOST: ""
 
 TZ: "America/Chicago"
@@ -38,3 +38,16 @@ S3_ACCESS_KEY_ID: ""
 S3_SECRET_ACCESS_KEY: ""
 S3_BUCKET_NAME: ""
 S3_ENDPOINT_URL: ""
+
+
+mariadb:
+  global:
+    # enabled is the master enabled switch. Setting this to true or false
+    # will enable or disable all the components within this chart by default.
+    enabled: true
+    # Used to define custom django.fullname in template.
+    projectName: "mariadb"
+    auth:
+      database: "tpng"
+      username: "trunkplayerng"
+      password: "S3CuR1tY"

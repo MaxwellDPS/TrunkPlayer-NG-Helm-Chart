@@ -22,3 +22,7 @@ version: 0.1.0
 # It is recommended to use it with quotes.
 appVersion: "0.1.0"
 icon: ""
+dependencies:
+- name: mariadb
+  version: 10.3.3
+  repository: https://charts.bitnami.com/bitnami
