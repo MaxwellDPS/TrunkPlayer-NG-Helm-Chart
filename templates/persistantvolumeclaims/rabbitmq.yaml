@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   labels:
       app: {{ .Release.Name }}
-  name: {{ .Release.Name }}-redisdata
+  name: {{ .Release.Name }}-amqpdata
   namespace: {{ .Release.Namespace }}
 spec:
   accessModes:
