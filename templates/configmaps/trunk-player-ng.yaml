@@ -12,7 +12,7 @@ data:
   SQL_USER: {{ .Values.SQL_USER | quote }}
   SQL_PASSWORD: {{ .Values.SQL_PASSWORD | quote }}
   {{ if .Values.mariadb.global.enabled }}
-  SQL_HOST: "{{ .Release.Name }}-mariadb-0"
+  SQL_HOST: "{{ .Release.Name }}-mariadb.{{ .Release.Namespace }}.svc.cluster.local"
   {{ else }}
   SQL_HOST: {{ .Values.SQL_HOST | quote }}
   {{ end }}
