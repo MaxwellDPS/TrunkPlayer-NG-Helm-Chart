@@ -19,6 +19,17 @@ spec:
       containers:
         - image: maxwelldps/trunkplayer-ng:{{ .Chart.AppVersion }}
           name: {{ .Release.Name }}-worker
+          command: 
+            - celery 
+            - "-A"
+            - trunkplayerNG
+            - worker
+            - "-l"
+            - info
+            - "--pool=gevent"
+            - "--concurrency=100"
+            - "-Q"
+            - "default,transmission_forwarding,RR_IMPORT,radio_alerts,radio_tx"
           envFrom:
           - configMapRef:
               name: {{ .Release.Name }}-configmap

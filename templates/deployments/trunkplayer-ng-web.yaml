@@ -16,11 +16,18 @@ spec:
       labels:
         app: {{ .Release.Name }}-web
     spec:
+      initContainers:
+        - name: tp-ng-migrations
+          image: maxwelldps/trunkplayer-ng:{{ .Chart.AppVersion }}
+          command: ['python', '-m', "gevent.monkey", "manage.py", "migrate"]
+        - name: tp-ng-staticfiles
+          image: maxwelldps/trunkplayer-ng:{{ .Chart.AppVersion }}
+          command: ['python', '-m', "gevent.monkey", "manage.py", "collectstatic"]
+
       containers:
-          
         - image: maxwelldps/trunkplayer-ng:{{ .Chart.AppVersion }}
           name: tpng-web
-          command: "bash -c 'python -m gevent.monkey manage.py migrate; python -m gevent.monkey manage.py collectstatic --no-input; uwsgi --ini /code/uwsgi.conf'"
+          command: ["uwsgi", "--ini", "/code/uwsgi.conf"]
           envFrom:
           - configMapRef:
               name: {{ .Release.Name }}-configmap
@@ -36,7 +43,6 @@ spec:
         
         - image: maxwelldps/trunkplayer-ng-nginx:{{ .Chart.AppVersion }}
           name: nginx
-          command: celery -A trunkplayerNG worker -l info --pool=gevent --concurrency 100 -Q default,transmission_forwarding,RR_IMPORT,radio_alerts,radio_tx
           envFrom:
           - configMapRef:
               name: {{ .Release.Name }}-configmap
