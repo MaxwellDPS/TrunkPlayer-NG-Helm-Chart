@@ -27,7 +27,7 @@ SECRET_KEY: "%2%xjx4c3obf_xa8hsdbd@ci+8!4)@x16_!auo*h(%*p_z(g"
 SQL_DATABASE: "tpng"
 SQL_USER: "trunkplayerng"
 SQL_PASSWORD: "S3CuR1tY"
-SQL_HOST: "mariadb"
+SQL_HOST: "{{ .Release.Name }}-mariadb"
 
 TZ: "America/Chicago"
 
