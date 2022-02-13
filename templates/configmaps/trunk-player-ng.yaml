@@ -11,7 +11,11 @@ data:
   SQL_DATABASE: {{ .Values.SQL_DATABASE | quote }}
   SQL_USER: {{ .Values.SQL_USER | quote }}
   SQL_PASSWORD: {{ .Values.SQL_PASSWORD | quote }}
+  {{ if .Values.mariadb.enabled }}
+  SQL_HOST: "{{ .Release.Name }}-mariadb"
+  {{ else }}
   SQL_HOST: {{ .Values.SQL_HOST | quote }}
+  {{ end }}
   TZ: {{ .Values.TZ | quote }}
   CELERY_BROKER_URL: "ampq://{{ .Values.RABBITMQ_DEFAULT_USER }}:{{ .Values.RABBITMQ_DEFAULT_PASS }}@{{ .Release.Name }}-rabbitmq.{{ .Release.Namespace }}.svc.cluster.local"
   USE_S3: {{ .Values.USE_S3 | quote }}
