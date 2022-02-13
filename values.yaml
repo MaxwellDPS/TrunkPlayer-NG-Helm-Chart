@@ -25,9 +25,9 @@ FORCE_SECURE: "True"
 SECRET_KEY: "%2%xjx4c3obf_xa8hsdbd@ci+8!4)@x16_!auo*h(%*p_z(g"
 
 SQL_DATABASE: "tpng"
-SQL_USER: "trunkplayerng"
+SQL_USER: "root"
 SQL_PASSWORD: "S3CuR1tY"
-SQL_HOST: "{{ .Release.Name }}-mariadb-0"
+SQL_HOST: "mariadb"
 
 TZ: "America/Chicago"
 
@@ -47,7 +47,42 @@ mariadb:
     enabled: true
     # Used to define custom django.fullname in template.
     projectName: "mariadb"
-    auth:
-      database: "tpng"
-      username: "trunkplayerng"
-      password: "S3CuR1tY"
+  auth:
+    rootPassword: "S3CuR1tY"      
+    database: tpng
+    username: "trunkplayerng"  
+    password: "S3CuR1tY"    
+    replicationUser: replicator
+    replicationPassword: ""
+    existingSecret: ""
+    forcePassword: false
+    usePasswordFiles: false
+    customPasswordFiles: {}  
+  primary:
+    
+    resources:
+      limits: {}
+      requests: {}
+
+  
+    
+    persistence:       
+      enabled: true
+      existingClaim: ""
+      subPath: ""
+      storageClass: ""
+      annotations: {}
+      accessModes:
+        - ReadWriteOnce     
+      size: 8Gi
+      selector: {}
+      
+    service:
+      type: ClusterIP
+      ports:
+        mysql: 3306
+      nodePorts:
+        mysql: ""
+      clusterIP: ""
+      loadBalancerIP: ""
+      externalTrafficPolicy: Cluster
