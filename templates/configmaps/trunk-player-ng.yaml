@@ -11,7 +11,7 @@ data:
   SQL_DATABASE: {{ .Values.SQL_DATABASE | quote }}
   SQL_USER: {{ .Values.SQL_USER | quote }}
   SQL_PASSWORD: {{ .Values.SQL_PASSWORD | quote }}
-  {{ if .Values.mariadb.enabled }}
+  {{ if .Values.mariadb.global.enabled }}
   SQL_HOST: "{{ .Release.Name }}-mariadb"
   {{ else }}
   SQL_HOST: {{ .Values.SQL_HOST | quote }}
