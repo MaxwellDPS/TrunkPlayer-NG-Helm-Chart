@@ -18,20 +18,20 @@ spec:
     spec:
       initContainers:
         - name: tp-ng-migrations
-          image: maxwelldps/trunkplayer-ng:{{ .Chart.AppVersion }}
+          image: trunkplayer/trunkplayer-ng:{{ .Chart.AppVersion }}
           command: ['python', '-m', "gevent.monkey", "manage.py", "migrate"]
           envFrom:
           - configMapRef:
               name: {{ .Release.Name }}-configmap
         - name: tp-ng-staticfiles
-          image: maxwelldps/trunkplayer-ng:{{ .Chart.AppVersion }}
+          image: trunkplayer/trunkplayer-ng:{{ .Chart.AppVersion }}
           command: ['python', '-m', "gevent.monkey", "manage.py", "collectstatic", "--noinput"]
           envFrom:
           - configMapRef:
               name: {{ .Release.Name }}-configmap
 
       containers:
-        - image: maxwelldps/trunkplayer-ng:{{ .Chart.AppVersion }}
+        - image: trunkplayer/trunkplayer-ng:{{ .Chart.AppVersion }}
           name: tpng-web
           command: ["uwsgi", "--ini", "/code/uwsgi.conf"]
           envFrom:
@@ -47,7 +47,7 @@ spec:
               memory: 256Mi
               cpu: 1
         
-        - image: maxwelldps/trunkplayer-ng-nginx:{{ .Chart.AppVersion }}
+        - image: trunkplayer/trunkplayer-ng-nginx:{{ .Chart.AppVersion }}
           name: nginx          
           ports:
             - containerPort: 80
