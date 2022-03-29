@@ -22,7 +22,7 @@ spec:
           command: 
             - celery 
             - "-A"
-            - trunkplayerNG
+            - trunkplayer_ng
             - worker
             - "-l"
             - info
