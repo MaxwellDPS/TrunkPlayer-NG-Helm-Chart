@@ -27,9 +27,9 @@ spec:
             - "-l"
             - info
             - "--pool=gevent"
-            - "--concurrency=100"
+            - "--concurrency=150"
             - "-Q"
-            - "default,transmission_forwarding,RR_IMPORT,radio_alerts,radio_tx"
+            - "default,transmission_forwarding,radio_refrence,radio_alerts,transmission_ingest,tranmission_push"
           envFrom:
           - configMapRef:
               name: {{ .Release.Name }}-configmap

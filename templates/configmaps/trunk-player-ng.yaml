@@ -8,13 +8,13 @@ data:
   FORCE_SECURE: {{ .Values.FORCE_SECURE | quote }}
   SEND_TELEMETRY: {{ .Values.SEND_TELEMETRY | quote }}
   SECRET_KEY: {{ .Values.SECRET_KEY | quote }}
-  SQL_DATABASE: {{ .Values.SQL_DATABASE | quote }}
-  SQL_USER: {{ .Values.SQL_USER | quote }}
-  SQL_PASSWORD: {{ .Values.SQL_PASSWORD | quote }}
+  MYSQL_DATABASE: {{ .Values.SQL_DATABASE | quote }}
+  MYSQL_USER: {{ .Values.SQL_USER | quote }}
+  MYSQL_PASSWORD: {{ .Values.SQL_PASSWORD | quote }}
   {{ if .Values.mariadb.global.enabled }}
-  SQL_HOST: "{{ .Release.Name }}-mariadb.{{ .Release.Namespace }}.svc.cluster.local"
+  MYSQL_HOST: "{{ .Release.Name }}-mariadb.{{ .Release.Namespace }}.svc.cluster.local"
   {{ else }}
-  SQL_HOST: {{ .Values.SQL_HOST | quote }}
+  MYSQL_HOST: {{ .Values.SQL_HOST | quote }}
   {{ end }}
   TZ: {{ .Values.TZ | quote }}
   CELERY_BROKER_URL: "amqp://{{ .Values.RABBITMQ_DEFAULT_USER }}:{{ .Values.RABBITMQ_DEFAULT_PASS }}@{{ .Release.Name }}-rabbitmq.{{ .Release.Namespace }}.svc.cluster.local"

@@ -42,10 +42,10 @@ spec:
           resources: 
             limits:
               memory: 2048Mi
-              cpu: "1500m"
+              cpu: "1000m"
             requests:
               memory: 256Mi
-              cpu: 1
+              cpu: "250m"
         
         - image: trunkplayer/trunkplayer-ng-nginx:{{ .Chart.AppVersion }}
           name: nginx          
@@ -54,10 +54,10 @@ spec:
           resources: 
             limits:
               memory: 2048Mi
-              cpu: "1500m"
+              cpu: "500m"
             requests:
               memory: 256Mi
-              cpu: 1
+              cpu: "250m"
         {{ if not .Values.USE_S3 }}
           volumeMounts:
             - mountPath: /code/static
