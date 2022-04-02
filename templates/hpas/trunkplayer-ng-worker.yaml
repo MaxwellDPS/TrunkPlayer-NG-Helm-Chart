@@ -9,4 +9,4 @@ spec:
     name: {{ .Release.Name }}-worker
   minReplicas: {{ .Values.TRUNKPLAYER_NG_WORKER_REPLICAS_MIN }}
   maxReplicas: {{ .Values.TRUNKPLAYER_NG_WORKER_REPLICAS_MAX }}
-  targetCPUUtilizationPercentage: 25
+  targetCPUUtilizationPercentage: 50

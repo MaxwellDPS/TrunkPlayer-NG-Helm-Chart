@@ -17,7 +17,11 @@ data:
   MYSQL_HOST: {{ .Values.SQL_HOST | quote }}
   {{ end }}
   TZ: {{ .Values.TZ | quote }}
+  {{ if .Values.ENABLE_RABBITMQ }}
   CELERY_BROKER_URL: "amqp://{{ .Values.RABBITMQ_DEFAULT_USER }}:{{ .Values.RABBITMQ_DEFAULT_PASS }}@{{ .Release.Name }}-rabbitmq.{{ .Release.Namespace }}.svc.cluster.local"
+  {{ else }}
+  CELERY_BROKER_URL: "amqp://{{ .Values.RABBITMQ_DEFAULT_USER }}:{{ .Values.RABBITMQ_DEFAULT_PASS }}@{{ .Values.RABBITMQ_HOST }}"
+  {{ end }}
   USE_S3: {{ .Values.USE_S3 | quote }}
   S3_ACCESS_KEY_ID: {{ .Values.S3_ACCESS_KEY_ID | quote }}
   S3_SECRET_ACCESS_KEY: {{ .Values.S3_SECRET_ACCESS_KEY | quote }}

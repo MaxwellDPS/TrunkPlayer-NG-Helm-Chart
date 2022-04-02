@@ -27,7 +27,8 @@ spec:
             - "-l"
             - info
             - "--pool=gevent"
-            - "--concurrency=150"
+            - "--concurrency=200"
+            - "--without-mingle"
             - "-Q"
             - "default,transmission_forwarding,radio_refrence,radio_alerts,transmission_ingest,tranmission_push"
           envFrom:
@@ -35,11 +36,11 @@ spec:
               name: {{ .Release.Name }}-configmap
           resources: 
             limits:
-              memory: 256Mi
-              cpu: "250m"
+              memory: 512Mi
+              cpu: "500m"
             requests:
-              memory: 56Mi
-              cpu: "100m"
+              memory: 128Mi
+              cpu: "250m"
                   {{ if not .Values.USE_S3 }}
           volumeMounts:
             - mountPath: /code/static

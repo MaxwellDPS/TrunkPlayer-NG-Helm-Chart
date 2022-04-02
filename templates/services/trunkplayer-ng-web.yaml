@@ -12,3 +12,18 @@ spec:
       targetPort: 80
   selector:
       app: {{ .Release.Name }}-web
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: trunk-player
+  namespace: {{ .Release.Namespace }}
+  labels:
+      app: {{ .Release.Name }}-web
+spec:
+  ports:
+    - name: "nginx-api"
+      port: 3031
+      targetPort: 3031
+  selector:
+      app: {{ .Release.Name }}-web

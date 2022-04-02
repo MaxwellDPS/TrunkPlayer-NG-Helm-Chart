@@ -1,3 +1,4 @@
+{{ if .Values.ENABLE_RABBITMQ }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -45,3 +46,4 @@ spec:
         - name: {{ .Release.Name }}-amqpdata
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-amqpdata
+{{ end }}
