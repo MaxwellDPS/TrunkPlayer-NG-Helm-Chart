@@ -25,6 +25,7 @@ SENTRY_DSN: "https://d83fa527e0044728b20de7dab246ea6f@bigbrother.weathermelon.io
 # Security
 FORCE_SECURE: "True"
 SECRET_KEY: "%2%xjx4c3obf_xa8hsdbd@ci+8!4)@x16_!auo*h(%*p_z(g"
+CORS_ALLOWED_HOSTs: "https://dev.trunkplayer.io https://localhost:3000 https://localhost:3001"
 
 SQL_DATABASE: "tpng"
 SQL_USER: "root"
