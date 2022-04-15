@@ -16,6 +16,7 @@ data:
   {{ else }}
   MYSQL_HOST: {{ .Values.SQL_HOST | quote }}
   {{ end }}
+  CORS_ALLOWED_HOSTs: {{ .Values.CORS_ALLOWED_HOSTs | quote }}
   TZ: {{ .Values.TZ | quote }}
   {{ if .Values.ENABLE_RABBITMQ }}
   CELERY_BROKER_URL: "amqp://{{ .Values.RABBITMQ_DEFAULT_USER }}:{{ .Values.RABBITMQ_DEFAULT_PASS }}@{{ .Release.Name }}-rabbitmq.{{ .Release.Namespace }}.svc.cluster.local"
