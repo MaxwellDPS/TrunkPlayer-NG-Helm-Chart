@@ -24,7 +24,7 @@ spec:
           - configMapRef:
               name: {{ .Release.Name }}-configmap
         - name: tp-ng-staticfiles
-          image: trunkplayer/trunkplayer-ng:{{ .Chart.AppVersion }}
+          image: trunkplayer/trunkplayer-ng-api:{{ .Chart.AppVersion }}
           command: ['python', '-m', "gevent.monkey", "manage.py", "collectstatic", "--noinput"]
           envFrom:
           - configMapRef:

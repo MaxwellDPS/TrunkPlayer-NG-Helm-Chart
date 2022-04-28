@@ -17,7 +17,7 @@ spec:
         app: {{ .Release.Name }}-worker
     spec:
       containers:
-        - image: trunkplayer/trunkplayer-ng:{{ .Chart.AppVersion }}
+        - image: trunkplayer/trunkplayer-ng-api:{{ .Chart.AppVersion }}
           name: {{ .Release.Name }}-worker
           command: 
             - celery 
